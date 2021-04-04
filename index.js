@@ -1,16 +1,6 @@
 const express = require('express');
-const passport = require('passport');
 const logger = require('morgan');
-const LocalStrategy = require('passport-local').Strategy;
-
-const path = require('path');
-const jwt  = require('jsonwebtoken');
-const jwtSecret= require('crypto').randomBytes(32);
 const cookieParser = require('cookie-parser');
-const JwtStrategy = require('passport-jwt').Strategy;
-
-const fortune = require('fortune-teller');
-
 const mongoose = require('mongoose');
 
 const loginRoute = require('./routes/login');
@@ -41,94 +31,7 @@ app.use('/login', loginRoute);
 app.use('/register', registerRoute);
 app.use('/', fortuneRoute);
 app.use('/logout', logoutRoute);
-// const cookieExtractor = req => {
-//     let jwt = null 
 
-//     if (req && req.cookies) {
-//         jwt = req.cookies['auth']
-//     }
-    
-//     return jwt;
-// }
-
-// passport.use('jwt', new JwtStrategy({
-//     jwtFromRequest: cookieExtractor,
-//     secretOrKey: jwtSecret
-// }, async (token, done) => {
-//     try {
-//         const { expiration } = token
-    
-//         if (Date.now() > expiration) {
-//             done('Unauthorized', false)
-//         }
-        
-//         return done(null, token)
-//     }
-//     catch (error) {
-//         done(error);
-//     }
-    
-// }))
-
-// passport.use('local',new LocalStrategy(
-//     {
-//         usernameField: 'username',
-//         passwordField: 'password',
-//         session:false
-//     },(username,password,done)=>{
-//         if(username === 'walrus' && password === 'walrus'){
-//             const user = {
-//                 username:'walrus',
-//                 description:'descripción'
-//             }
-//             return done(null,user);
-//         }
-//         return done(null,false);
-//     }
-// ));
-
-// app.use(passport.initialize());
-// const myLogger = (req,res,next)=>{
-//      console.log(req)
-//      next();
-// }
-
-
-// app.use((err,req,res,next)=>{
-//     console.log(err.stack);
-//     res.status(500).send('There was an error')
-// });
-// app.use(myLogger);
-
-// app.get('/', passport.authenticate('jwt',{session : false, failureRedirect: '/login'}), (req,res)=>{
-//     res.send(fortune.fortune());
-// })
-
-
-// app.get('/user',(req,res)=>{
-//     const user = {
-//         username:"walrus",
-//         description:"description"
-//     }
-//     res.json(user)
-// });
-
-// app.get('/login',(req,res)=>{
-//     res.sendFile(path.join(__dirname,"login.html"));
-// });
-
-// app.post('/login', passport.authenticate('local',{session : false,failureRedirect: '/login'}),(req,res)=>{
-//     const payload ={
-//         iss: config.iss,
-//         sub: req.user.username,
-//         aud: config.aud,
-//         exp: Math.floor(Date.now() / 1000) + 604800
-//     }
-//     const token = jwt.sign(payload,jwtSecret);
-//     // res.send(`heloo  ${req.user.username} and token ${token}`);
-//     res.cookie('auth', token, {httpOnly:true});
-//     res.redirect("/");
-// })
 
 app.listen(config.PORT,()=>{
     console.log(`Listening at http://localhost:${config.PORT}`);

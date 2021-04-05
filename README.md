@@ -30,4 +30,4 @@ If you are not authenticated in the application you will not be able to access t
 
 - *Passwords are generated with bycrypt library and also salt has been used to those passwords.*
 
-![Alt text](./images/passwords.png?raw=true "Passwords")
+![Alt text](/images/passwords.png?raw=true "Passwords")

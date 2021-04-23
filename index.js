@@ -7,6 +7,7 @@ const loginRoute = require('./routes/login');
 const registerRoute = require('./routes/register');
 const fortuneRoute = require('./routes/fortune');
 const logoutRoute = require('./routes/logout');
+const authRoute = require('./routes/auth');
 const config = require('./config')
 const app = express();
 
@@ -31,6 +32,7 @@ app.use('/login', loginRoute);
 app.use('/register', registerRoute);
 app.use('/', fortuneRoute);
 app.use('/logout', logoutRoute);
+app.use('/auth', authRoute);
 
 
 app.listen(config.PORT,()=>{

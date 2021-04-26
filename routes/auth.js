@@ -1,22 +1,16 @@
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
-const User = require("../models/User");
 const config = require('../config.js');
-const OAuth2Strategy = require('passport-oauth2').Strategy;
-const { deleteOne } = require('../models/User');
+const Github2Strategy = require('passport-github2').Strategy;
+const userController = require('../controllers/userController');
 
-passport.use(new OAuth2Strategy({
-    authorizationURL: 'https://github.com/login/oauth/authorize',
-    tokenURL: 'https://github.com/login/oauth/access_token',
+passport.use('github2', new Github2Strategy({
     clientID: config.CLIENT_ID,
     clientSecret: config.CLIENT_SECRET,
     callbackURL: "http://localhost:3000/auth/github/callback"
   },
-  function(accessToken, refreshToken, profile, cb, done) {
-    // User.findOrCreate({ exampleId: profile.id }, function (err, user) {
-    //   return cb(err, user);
-    // });
+  function(accessToken, refreshToken, profile, done) {
     if (profile) {
         return done(null, profile);
     }
@@ -24,12 +18,8 @@ passport.use(new OAuth2Strategy({
   }
 ));
 
-router.get('/github', passport.authenticate('oauth2', {session: false}));
+router.get('/github', passport.authenticate('github2', {session: false, scope: ['user:email']}));
 
-router.get('/github/callback', passport.authenticate('oauth2' , {session: false, failureRedirect: '/login'}), 
-    function (req,res) {
-        //res.redirect('/');
-    }
-);
+router.get('/github/callback', passport.authenticate('github2' , {session: false, failureRedirect: '/login'}), userController.login);
 
 module.exports = router;

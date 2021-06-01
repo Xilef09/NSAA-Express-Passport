@@ -9,7 +9,9 @@
 <body>
     <p><strong>Want to listen to the fortune-teller server?</strong></p>
     <p>Please login to proceed</p>
-    <form action="/login" method="post">
+    <p><i>Login with RADIUS requieres to use the realm @upc.edu for username</i></p>
+    <p><strong>Only works inside Kali VM, with RADIUS server running and configured</strong></p>
+    <form action="/auth/radius" method="post">
         <div>
             <label>Username:</label>
             <input type="text" name="username" />
@@ -21,15 +23,6 @@
         <div>
             <input type="submit" value="Log In" />
         </div>
-    </form>
-    <form action="/register">
-        <input type="submit" value="Register"/>
-    </form>
-    <form action="/auth/github">
-        <input type="submit" value="Log in with Github"/>
-    </form>
-    <form action="/auth/radius">
-        <input type="submit" value="Log in with Radius"/>
     </form>
 </body>
 

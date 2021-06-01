@@ -9,5 +9,7 @@ module.exports = {
     CLIENT_SECRET: "2db1371b619fb464bf2fc63f99d207e262e9fdb3",
     CLIENT_ID: "5183673edbb937ffe495",
     GITHUBUSER_ENDPOINT: "https://api.github.com/user",
-    GITHUBUSEREMAIL_ENDPOINT: "https://api.github.com/user/emails"
+    GITHUBUSEREMAIL_ENDPOINT: "https://api.github.com/user/emails",
+    RADIUS_SECRET: "testing123",
+    RADIUS_PORT: 1812
 }
